@@ -1,0 +1,123 @@
+#include<stdio.h>
+
+int valida(float x){
+if(x>0){
+        printf("la cantidad ingresada es valida\n");
+        if(x==0)
+            {
+        printf("la cantidad ingresada es 0,\n mal");
+
+}
+    return 1;
+} else{
+        printf("la cantidad ingresada es negativa,\n Ingrese cantidad valida");
+
+}
+ return 0;
+}
+// funcion para el pin
+int pin(int intento) {
+    int pinc= 8008;
+    if (intento == pinc) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+int main(){
+
+int opcion;
+float cantidad;
+float saldo[3]={1000, 2000, 3000};
+float saldox;
+int v;
+int intento;
+int contador=0;
+int cuenta;
+
+// pedir pin
+printf("Ingresar pin ");
+scanf("%d", &intento);
+
+// Verificarlo
+while(!pin(intento)) {
+        contador++;
+    printf("Pin incorrecto. Intente nuevamente: ");
+    scanf("%d", &intento);
+
+     if (contador == 2) {
+            printf("Demasiados intentos incorrectos se niega la entrada al cajero.\n");
+            return 0;  //contador
+        }
+}
+
+printf("Bienvenido al cajero.\n");
+
+do{
+        printf("Selecciona la cuenta a acceder\n 1) Infantil,\n 2) Secundaria\n 3) principal\n");
+
+scanf("%d",&cuenta);
+    if (cuenta ==1)
+    {
+         saldox=saldo[0];
+    } else if ( cuenta==2){
+        saldox=saldo[1];
+    } else if ( cuenta==3){
+       saldox=saldo[2];
+    } else {
+        printf("Cuenta no valida, seleccione una cuenta existente\n");
+    }
+} while (cuenta !=1 && cuenta !=2 && cuenta!=3);
+
+
+
+//parte hecha en clase
+do{
+    printf("\n---Cajero automatico---\n");
+    printf("1. consultar saldo\n");
+    printf("2. depositar dinero\n");
+    printf("3. Retirar dinero \n");
+    printf("4. salir\n ");
+    printf("Seleccione opcion \n");
+    scanf("%d", &opcion);
+
+    switch(opcion){
+        case 1:
+            printf("tu saldo es %f", saldox);
+        break;
+        case 2:
+            printf("Eliga la cantidad a depositar\n");
+            scanf("%f",&cantidad);
+            v=valida(cantidad);
+            while(v!=1){
+                printf("Ingrese nueva cantidad positiva");
+                scanf("%f",&cantidad);
+            }
+            saldox= cantidad+saldox;
+            printf("Su nuevo saldo es de %f", saldox);
+        break;
+        case 3:
+             printf("Eliga la cantidad a retirar\n");
+            scanf("%f",&cantidad);
+            v=valida(cantidad);
+            while(v!=1){
+                printf("Ingrese nueva cantidad positiva");
+                scanf("%f",&cantidad);
+            }
+            if (cantidad>saldox){
+                printf("Cantidad a retirar mayor a saldo disponible, operacion no valida");
+            } else { saldox= saldox-cantidad;
+            printf("Su nuevo saldo es %f ", saldox);}
+
+        break;
+
+
+    }
+
+
+} while(opcion!=4);
+
+return 0;
+//fin
+}
