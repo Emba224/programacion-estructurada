@@ -1,0 +1,87 @@
+#include<stdio.h>
+
+struct Estudiante {
+     char nombre[50];
+      int edad;
+     float promedio;
+     char grado;
+};
+
+struct materia{
+char nombre[25];
+float calificacion;
+int creditos;
+};
+void imprimir (struct Estudiante info){
+printf("%s\n", info.nombre);
+printf("%d\n", info.edad);
+printf("%f\n", info.promedio);
+
+}
+void im (struct materia data){
+printf("%s\n", data.nombre);
+printf("%d\n", data.calificacion);
+printf("%f\n", data.creditos);
+
+};
+
+void modifica ( struct Estudiante *dato, float nuevoprom){
+dato -> promedio= nuevoprom;
+}
+
+float cpm(struct materia materias[], int cantidad) {
+    float suma = 0;
+    for (int i = 0; i < cantidad; i++) {
+        suma += materias[i].calificacion;
+    }
+    return (suma / cantidad)/10;
+}
+
+
+
+
+
+int main(){
+//independiente de todo lo demas
+struct Estudiante ana = {"Ana Garcia", 19, 9.5, 'A'};
+
+ana.promedio = 9.8;  // se sobreescribe el promedio en todos
+ana.grado = 'A';
+
+
+printf(" Nombre = %s \nPromedio = %f\n Grado= %c\n", ana.nombre, ana.promedio, ana.grado);
+
+//Usando lo de afuera [void imprimir]
+printf("Segunda forma\n");
+
+imprimir (ana);
+
+//por referencia
+float nuevoprom;
+
+printf(" ¿ Cual es el nuevo promedio de ana ?\n");
+scanf("%f", &nuevoprom);
+fflush(stdin);
+
+printf("\nPor referencia\n");
+
+modifica (&ana, nuevoprom);
+printf("%f\n", ana.promedio);
+
+
+//materias
+printf("ahora con materias\n");
+struct materia segundo[3]={
+    {"Programación Estructurada", 40.2, 8},
+    {"Calculo", 68, 8 },
+    { "Matematicas discretas",99,8 }
+    };
+
+ float promedioMaterias = cpm(segundo, 3);
+    modifica(&ana, promedioMaterias);
+
+    printf("\nNuevo promedio calculado de las materias:\n");
+    printf("Promedio = %.2f\n", ana.promedio);
+
+return 0;
+}
