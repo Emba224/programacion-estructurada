@@ -1,0 +1,21 @@
+#include<stdio.h>
+
+
+
+int main (){
+
+void mostrarProducto(struct Producto p) {
+     printf("Nombre: %s\nPrecio: $%.2f\n", p.nombre, p.precio);}
+
+
+     void actualizarStock(struct Producto *p, int nuevoStock) {
+    p->stock = nuevoStock;
+
+
+
+
+
+
+return 0;
+
+}
